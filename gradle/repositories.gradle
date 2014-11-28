@@ -1,0 +1,7 @@
+def ourRepos = {
+	mavenLocal()
+	maven { url "$ubsRepoBase/g-ctit-public/" }
+}
+
+project.buildscript.repositories(ourRepos)
+project.repositories(ourRepos)

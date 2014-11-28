@@ -1,0 +1,54 @@
+configurations {
+    xjc
+}
+
+ext.genDir = "src/generated/java"
+sourceSets.main.java.srcDirs += genDir
+
+ext.destinationPackage = 'default.package'
+
+dependencies {
+    xjc libs.jaxb_xjc
+}
+
+task xjc(dependsOn: processResources) {
+    doLast {
+
+        file(genDir).mkdirs()
+
+        ant.taskdef(
+                name: 'xjc',
+                classname: 'com.sun.tools.xjc.XJCTask',
+                classpath: configurations.xjc.asPath)
+
+        fileTree(dir: sourceSets.main.output.resourcesDir, include: '**/*.xsd').each { schemaFile ->
+            def bindingFile = findMatchingBindingFileFrom(schemaFile)
+            if (bindingFile.exists()) {
+                logger.quiet("Processing schema: ${schemaFile} with binding: ${bindingFile}")
+                ant.xjc(destdir: genDir, package: destinationPackage, schema: schemaFile, binding: bindingFile, extension: 'true'){
+                    arg line: '-nv'
+                }
+            } else {
+                logger.quiet("Processing schema: ${schemaFile} without a binding file")
+                ant.xjc(destdir: genDir, package: destinationPackage, schema: schemaFile, extension: 'true'){
+                    arg line: '-nv'
+                }
+            }
+        }
+    }
+}
+
+def findMatchingBindingFileFrom(schemaFile) {
+    def fs = File.separatorChar
+    def bindingFilename = schemaFile.absolutePath
+                            .replace("${fs}xsd${fs}","${fs}xjb${fs}")
+                            .replace(".xsd",".xjb")
+    logger.debug("Matching binding file for schema ${schemaFile} is expected at ${bindingFilename}")
+    file(bindingFilename)
+}
+
+[compileJava, ideaModule, eclipseProject]*.dependsOn xjc
+
+clean {
+    delete genDir
+}

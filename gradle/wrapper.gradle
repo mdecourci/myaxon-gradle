@@ -1,0 +1,22 @@
+println "-Building project with Gradle [${project.gradle.gradleVersion}], Java [${System.getProperty('java.version')}]"
+
+
+task wrapper(type: Wrapper) {
+    description = "Creates the wrapper scripts for gradle"
+    gradleVersion = '1.10'
+    distributionUrl = "$ubsRepoBase/int-ctit-thirdparty/content/org/gradle/distributions/${gradleVersion}/gradle-${gradleVersion}-bin.zip"
+
+    ext {
+        nixGradleOpts = '-Dgradle.user.home=$HOME/.gradle'
+        winGradleOpts = '-Dgradle.user.home=C:/UBS/dev/.gradle'
+    }
+
+    doLast() {
+        File nixWrapper = file("gradlew")
+        nixWrapper.text = nixWrapper.text.replace("DEFAULT_JVM_OPTS=",
+                "GRADLE_OPTS=\"$nixGradleOpts \$GRADLE_OPTS\"\nDEFAULT_JVM_OPTS=")
+        File winWrapper = file("gradlew.bat")
+        winWrapper.text = winWrapper.text.replace("set DEFAULT_JVM_OPTS=",
+                "set GRADLE_OPTS=$winGradleOpts %GRADLE_OPTS%\nset DEFAULT_JVM_OPTS=")
+    }
+}

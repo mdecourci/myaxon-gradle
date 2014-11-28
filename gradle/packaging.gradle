@@ -1,0 +1,13 @@
+jar {
+    version = project.shortGitSHA
+    manifest {
+        attributes 'Build-Jdk': System.getProperty('java.version')
+        attributes 'Created-By': project.gradle.gradleVersion
+        attributes 'Built-Date': new Date()
+        attributes 'Build-Jdk': System.getProperty('java.version')
+        attributes 'Implementation-Title': project.name
+        attributes 'Implementation-Version': project.version
+        attributes 'Implementation-Vendor-Id': project.group
+        attributes 'Git-SHA': project.gitSHA
+    }
+}

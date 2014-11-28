@@ -1,0 +1,18 @@
+task gitInfo {
+    if (project.version == "unspecified") {
+        project.ext.majorVersion = 1
+        project.ext.minorVersion = 0
+        if (project.hasProperty("teamcity")) {
+            project.ext.gitSHA = project.teamcity.GitSHA
+            project.minorVersion = project.teamcity["build.number"]
+            println "build number: $project.minorVersion"
+            println "git version: $project.gitSHA"
+        } else if (project.hasProperty("testVersion")) {
+            project.ext.gitSHA = project.testVersion
+        } else {
+            project.ext.gitSHA = "000000000000"
+        }
+        project.ext.shortGitSHA = project.gitSHA.substring(0, 7)
+        project.version = "$project.majorVersion.$project.minorVersion.$project.shortGitSHA"
+    }
+}

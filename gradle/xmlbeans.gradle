@@ -1,0 +1,52 @@
+configurations {
+    xmlbeans
+}
+
+sourceSets {
+    generated {}
+    main {
+        output.dir(genResDir, builtBy: 'generateXmlBeans')
+    }
+}
+
+dependencies {
+    xmlbeans libs.xmlbeans
+    compile files(project.sourceSets.generated.resources.srcDirs.toList().first()) { builtBy "generateXmlBeans" }
+}
+
+// Only effectual when using `./gradlew eclipse` due to GRADLE-2989
+// Need to get the binary output of running xmlbeans on the classpath in Eclipse
+eclipse {
+    classpath {
+        sourceSets += project.sourceSets.generated
+        classFolders += project.sourceSets.generated.resources.srcDirs
+    }
+}
+
+task generateXmlBeans(dependsOn: processResources) {
+    doLast() {
+
+        logger.quiet("Generating XML beans")
+
+        ant.taskdef(
+                name: 'xmlbean',
+                classname: 'org.apache.xmlbeans.impl.tool.XMLBean',
+                classpath: configurations.xmlbeans.asPath)
+
+        fileTree(dir: sourceSets.main.output.resourcesDir, include: '**/*.xsd').each { schemaFile ->
+            ant.xmlbean(
+                    classpath: configurations.xmlbeans.asPath,
+                    schema: schemaFile,
+                    srcgendir: project.sourceSets.generated.java.srcDirs.toList().first(),
+                    classgendir: project.sourceSets.generated.resources.srcDirs.toList().first(),
+                    srconly: 'false')
+        }
+    }
+}
+
+[ideaModule, eclipseProject]*.dependsOn generateXmlBeans
+
+clean {
+    delete sourceSets.generated.java, sourceSets.generated.resources
+}
+

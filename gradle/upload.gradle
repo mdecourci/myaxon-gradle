@@ -1,0 +1,30 @@
+apply plugin: "maven"
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.groupId = project.group
+            pom.artifactId = project.artifactId
+            pom.version = project.version
+            def credentials = getMavenRepositoryCredentials()
+            repository(url: "$ubsRepoBase/int-ctit-releases/") {
+                authentication(userName: credentials.username, password: credentials.password)
+            }
+        }
+    }
+}
+
+def getMavenRepositoryCredentials() {
+    if (project.hasProperty("teamcity")) {
+        [
+                username: project.teamcity["maven.repository.username"],
+                password: project.teamcity["maven.repository.password"]
+        ]
+    } else {
+        [
+                username: project.properties["maven.repository.username"],
+                password: project.properties["maven.repository.password"]
+        ]
+    }
+
+}
