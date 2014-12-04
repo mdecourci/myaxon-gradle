@@ -15,8 +15,6 @@ description = """"""
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-
-
 repositories {
     mavenCentral()
      maven { url "http://repo.maven.apache.org/maven2" }
@@ -44,27 +42,31 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web:1.1.9.RELEASE') {
         exclude module: 'spring-boot-starter-logging'
     }
+    compile("org.springframework.boot:spring-boot-starter-actuator:1.1.9.RELEASE")
+    
     compile('org.springframework.boot:spring-boot-starter-log4j:1.1.9.RELEASE') {
         exclude module: 'slf4j-log4j12'
     }
+    compile 'org.yaml:snakeyaml:1.14'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'1.1.9.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-security:1.1.9.RELEASE'
+    compile 'org.springframework:spring-messaging:4.1.2.RELEASE'
     compile group: 'org.mapdb', name: 'mapdb', version:'1.0.6'
     compile group: 'net.sf.jxls', name: 'jxls-core', version:'1.0.5'
     compile group: 'net.sf.jxls', name: 'jxls-reader', version:'1.0.5'
 
     compile group: 'org.axonframework', name: 'axon-core', version:'2.3.2'
-    compile group: 'org.jadira.usertype', name: 'usertype.extended', version:'3.2.0.GA'
     compile group: 'com.h2database', name: 'h2', version:'1.4.181'
 
     compile('net.sf.dozer:dozer:5.4.0') {
         exclude module: 'slf4j-log4j12'
         transitive = false
     }
-
+/*
     compile('org.jadira.usertype:usertype.extended:3.2.0.GA') {
         transitive = true
     }
-
+*/
     compile('com.ebay:xcelite:1.0.4') {
         transitive = true
     }

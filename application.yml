@@ -1,0 +1,17 @@
+resources:
+  media_type: application/vnd.drm.approvals+json
+  root: http://drmlocal/approvals
+  api_key: approvals
+
+database:
+  driverClass: org.h2.Driver
+  user: sa
+  password: crypto:EmGfg7fax++DxYxhSY66Sg==
+  url: jdbc:h2:tcp://localhost:10402/drm-approvals
+
+applicationConnectors:
+    type: http
+    port: 10300
+adminConnectors:
+    type: http
+    port: 10301

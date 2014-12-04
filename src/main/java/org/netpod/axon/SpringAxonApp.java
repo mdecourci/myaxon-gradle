@@ -1,17 +1,22 @@
-package org.netpod.axon.spring;
+package org.netpod.axon;
 
 import java.util.Arrays;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfiguration;
+import org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 @Configuration
-//@Import(value = ChatterConfig.class)
+@Import(value = {MyAxonConfig.class, LiquibaseAutoConfiguration.class, FreeMarkerAutoConfiguration.class})
 @ComponentScan
 @EnableAutoConfiguration
+@EnableConfigurationProperties
 //@EnableAutoConfiguration(exclude = {HibernateJpaAutoConfiguration.class, DataSourceAutoConfiguration.class})
 public class SpringAxonApp {
 
