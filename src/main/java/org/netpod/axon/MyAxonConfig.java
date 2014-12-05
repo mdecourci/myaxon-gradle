@@ -1,6 +1,5 @@
 package org.netpod.axon;
 
-import java.io.File;
 import java.util.Arrays;
 
 import org.axonframework.commandhandling.CommandBus;
@@ -9,18 +8,18 @@ import org.axonframework.commandhandling.annotation.AggregateAnnotationCommandHa
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.commandhandling.gateway.CommandGatewayFactoryBean;
 import org.axonframework.commandhandling.interceptors.BeanValidationInterceptor;
+import org.axonframework.common.jpa.ContainerManagedEntityManagerProvider;
+import org.axonframework.common.jpa.EntityManagerProvider;
 import org.axonframework.domain.DefaultIdentifierFactory;
 import org.axonframework.domain.IdentifierFactory;
 import org.axonframework.eventhandling.EventBus;
 import org.axonframework.eventhandling.SimpleEventBus;
 import org.axonframework.eventsourcing.EventSourcingRepository;
 import org.axonframework.eventsourcing.SpringPrototypeAggregateFactory;
-import org.axonframework.eventstore.fs.FileSystemEventStore;
-import org.axonframework.eventstore.fs.SimpleEventFileResolver;
+import org.axonframework.eventstore.jpa.JpaEventStore;
 import org.netpod.axon.domain.ToDoItem;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.messaging.simp.SimpMessageSendingOperations;
 
 @Configuration
 public class MyAxonConfig {
@@ -45,14 +44,14 @@ public class MyAxonConfig {
 		return new SimpleEventBus();
 	}
 	
-//	@Bean
-//	public EntityManagerProvider entityManagerProvider() {
-//		return new ContainerManagedEntityManagerProvider();
-//	}
+	@Bean
+	public EntityManagerProvider entityManagerProvider() {
+		return new ContainerManagedEntityManagerProvider();
+	}
 	
 	@Bean
 	public EventSourcingRepository<ToDoItem> toDoItemRepository() {
-		FileSystemEventStore eventStore = new FileSystemEventStore(new SimpleEventFileResolver(new File("data/evenstore")));
+		JpaEventStore eventStore = new JpaEventStore(entityManagerProvider());
 		EventSourcingRepository<ToDoItem> repository = new EventSourcingRepository<ToDoItem>(ToDoItem.class, eventStore);
 		repository.setEventBus(eventBus());
 		return repository;
