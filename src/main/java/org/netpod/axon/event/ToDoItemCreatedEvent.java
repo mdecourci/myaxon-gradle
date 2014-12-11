@@ -1,4 +1,4 @@
-package com.ubs.drm.axon.event;
+package org.netpod.axon.event;
 
 public class ToDoItemCreatedEvent {
 	private final String todoId;

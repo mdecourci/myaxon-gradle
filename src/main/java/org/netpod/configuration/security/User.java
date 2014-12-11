@@ -1,4 +1,4 @@
-package com.ubs.drm.configuration.security;
+package org.netpod.configuration.security;
 
 import java.util.ArrayList;
 import java.util.Collection;

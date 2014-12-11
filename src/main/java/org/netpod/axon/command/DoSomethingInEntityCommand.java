@@ -1,4 +1,4 @@
-package com.ubs.drm.axon.command;
+package org.netpod.axon.command;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

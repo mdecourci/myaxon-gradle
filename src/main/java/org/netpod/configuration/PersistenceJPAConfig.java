@@ -1,4 +1,4 @@
-package com.ubs.drm.configuration;
+package org.netpod.configuration;
 
 import java.util.Properties;
 

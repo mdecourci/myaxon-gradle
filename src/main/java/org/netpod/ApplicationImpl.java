@@ -1,4 +1,4 @@
-package com.ubs.drm;
+package org.netpod;
 
 import java.util.Arrays;
 
@@ -16,9 +16,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import com.ubs.drm.configuration.AxonConfiguration;
-import com.ubs.drm.configuration.PersistenceJPAConfig;
-import com.ubs.drm.configuration.WebSecurityConfiguration;
+import org.netpod.configuration.AxonConfiguration;
+import org.netpod.configuration.PersistenceJPAConfig;
+import org.netpod.configuration.WebSecurityConfiguration;
 
 @Configuration
 @Import(value = {AxonConfiguration.class, PersistenceJPAConfig.class, LiquibaseAutoConfiguration.class, FreeMarkerAutoConfiguration.class})

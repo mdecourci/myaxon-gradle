@@ -1,4 +1,4 @@
-package com.ubs.drm.axon.command;
+package org.netpod.axon.command;
 
 public class CreateMyAggregateCommand {
 

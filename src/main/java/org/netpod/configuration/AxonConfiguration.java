@@ -1,4 +1,4 @@
-package com.ubs.drm.configuration;
+package org.netpod.configuration;
 
 import java.util.Arrays;
 
@@ -21,7 +21,7 @@ import org.axonframework.eventstore.jpa.JpaEventStore;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.ubs.drm.core.domain.entity.ToDoItem;
+import org.netpod.core.domain.entity.ToDoItem;
 
 @Configuration
 @AnnotationDriven

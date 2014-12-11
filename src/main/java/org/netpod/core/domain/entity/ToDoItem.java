@@ -1,4 +1,4 @@
-package com.ubs.drm.core.domain.entity;
+package org.netpod.core.domain.entity;
 
 import javax.inject.Named;
 
@@ -10,10 +10,10 @@ import org.axonframework.eventsourcing.annotation.AggregateIdentifier;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 
-import com.ubs.drm.axon.command.CreateToDoItemCommand;
-import com.ubs.drm.axon.command.MarkCompletedCommand;
-import com.ubs.drm.axon.event.ToDoItemCompletedEvent;
-import com.ubs.drm.axon.event.ToDoItemCreatedEvent;
+import org.netpod.axon.command.CreateToDoItemCommand;
+import org.netpod.axon.command.MarkCompletedCommand;
+import org.netpod.axon.event.ToDoItemCompletedEvent;
+import org.netpod.axon.event.ToDoItemCreatedEvent;
 
 @Named
 @AnnotationDriven(commandBus="commandBus", eventBus="eventBus")

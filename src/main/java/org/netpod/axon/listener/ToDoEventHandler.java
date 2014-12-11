@@ -1,9 +1,9 @@
-package com.ubs.drm.axon.listener;
+package org.netpod.axon.listener;
 
 import org.axonframework.eventhandling.annotation.EventHandler;
 
-import com.ubs.drm.axon.event.ToDoItemCompletedEvent;
-import com.ubs.drm.axon.event.ToDoItemCreatedEvent;
+import org.netpod.axon.event.ToDoItemCompletedEvent;
+import org.netpod.axon.event.ToDoItemCreatedEvent;
 
 public class ToDoEventHandler {
 	@EventHandler

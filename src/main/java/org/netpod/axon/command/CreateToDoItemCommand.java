@@ -1,4 +1,4 @@
-package com.ubs.drm.axon.command;
+package org.netpod.axon.command;
 
 import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
 

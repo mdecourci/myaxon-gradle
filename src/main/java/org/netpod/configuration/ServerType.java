@@ -1,4 +1,4 @@
-package com.ubs.drm.configuration;
+package org.netpod.configuration;
 
 public abstract class ServerType {
 	private String type;

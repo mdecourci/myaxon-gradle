@@ -1,4 +1,4 @@
-package com.ubs.drm.configuration.security.service;
+package org.netpod.configuration.security.service;
 
 import java.util.Arrays;
 
@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.ubs.drm.configuration.security.User;
+import org.netpod.configuration.security.User;
 
 @Named("userDetailsService")
 public class UserServiceLdapProxy implements UserDetailsService {
