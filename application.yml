@@ -6,8 +6,8 @@ resources:
 database:
   driverClass: org.h2.Driver
   user: sa
-  password: crypto:EmGfg7fax++DxYxhSY66Sg==
-  url: jdbc:h2:tcp://localhost:10402/drm-approvals
+  password: password
+  url: jdbc:h2:tcp://localhost:10402/drm-risk-management
 
 applicationConnectors:
     type: http

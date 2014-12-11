@@ -1,4 +1,4 @@
-package org.netpod.axon.configuration;
+package com.ubs.drm.configuration;
 
 import javax.inject.Named;
 

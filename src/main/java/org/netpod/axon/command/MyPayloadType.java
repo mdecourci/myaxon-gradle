@@ -1,4 +1,4 @@
-package org.netpod.axon.command;
+package com.ubs.drm.axon.command;
 
 import java.time.ZonedDateTime;
 

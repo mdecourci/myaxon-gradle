@@ -1,4 +1,4 @@
-package org.netpod.axon;
+package com.ubs.drm.configuration;
 
 import java.util.Arrays;
 
@@ -10,6 +10,7 @@ import org.axonframework.commandhandling.gateway.CommandGatewayFactoryBean;
 import org.axonframework.commandhandling.interceptors.BeanValidationInterceptor;
 import org.axonframework.common.jpa.ContainerManagedEntityManagerProvider;
 import org.axonframework.common.jpa.EntityManagerProvider;
+import org.axonframework.contextsupport.spring.AnnotationDriven;
 import org.axonframework.domain.DefaultIdentifierFactory;
 import org.axonframework.domain.IdentifierFactory;
 import org.axonframework.eventhandling.EventBus;
@@ -17,12 +18,14 @@ import org.axonframework.eventhandling.SimpleEventBus;
 import org.axonframework.eventsourcing.EventSourcingRepository;
 import org.axonframework.eventsourcing.SpringPrototypeAggregateFactory;
 import org.axonframework.eventstore.jpa.JpaEventStore;
-import org.netpod.axon.domain.ToDoItem;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.ubs.drm.core.domain.entity.ToDoItem;
+
 @Configuration
-public class MyAxonConfig {
+@AnnotationDriven
+public class AxonConfiguration {
 
 	@Bean
 	public CommandGatewayFactoryBean<CommandGateway> commandGatewayFactoryBean() {
@@ -75,5 +78,4 @@ public class MyAxonConfig {
 	public IdentifierFactory iIdentifierFactory() {
 		return new DefaultIdentifierFactory();
 	}
-
 }

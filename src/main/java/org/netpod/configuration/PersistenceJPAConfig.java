@@ -1,4 +1,4 @@
-package org.netpod.axon.configuration;
+package com.ubs.drm.configuration;
 
 import java.util.Properties;
 
@@ -36,10 +36,10 @@ public class PersistenceJPAConfig {
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		dataSource.setUrl("jdbc:oracle:thin:@127.0.0.1:1521:orcl");
-		dataSource.setUsername("acswdev");
-		dataSource.setPassword("acswdev");
+		dataSource.setDriverClassName("org.h2.Driver");
+		dataSource.setUrl("jdbc:h2:tcp://localhost:10402/drm-risk-management");
+		dataSource.setUsername("sa");
+		dataSource.setPassword("password");
 		return dataSource;
 	}
 
@@ -61,7 +61,7 @@ public class PersistenceJPAConfig {
 		Properties properties = new Properties();
 		properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
 		properties.setProperty("hibernate.dialect",
-				"org.hibernate.dialect.OracleDialect");
+				"org.hibernate.dialect.H2Dialect");
 		return properties;
 	}
 }

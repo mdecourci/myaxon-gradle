@@ -1,4 +1,4 @@
-package org.netpod.axon.resource;
+package com.ubs.drm.axon.resource;
 
 import java.security.Principal;
 
@@ -7,12 +7,6 @@ import javax.validation.Valid;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.domain.IdentifierFactory;
-import org.netpod.axon.command.CreateToDoItemCommand;
-import org.netpod.axon.configuration.AdminServer;
-import org.netpod.axon.configuration.Database;
-import org.netpod.axon.configuration.Resources;
-import org.netpod.axon.configuration.Server;
-import org.netpod.axon.request.ToDoItemRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -23,6 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.ubs.drm.axon.command.CreateToDoItemCommand;
+import com.ubs.drm.axon.request.ToDoItemRequest;
+import com.ubs.drm.configuration.AdminServer;
+import com.ubs.drm.configuration.Database;
+import com.ubs.drm.configuration.Resources;
+import com.ubs.drm.configuration.Server;
 
 @RestController
 @RequestMapping("/todo")

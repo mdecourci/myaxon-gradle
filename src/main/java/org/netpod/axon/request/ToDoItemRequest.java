@@ -1,4 +1,4 @@
-package org.netpod.axon.request;
+package com.ubs.drm.axon.request;
 
 public class ToDoItemRequest {
 	private String description;
