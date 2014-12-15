@@ -1,28 +1,28 @@
 buildscript {
     repositories {
-        maven { url 'http://cft-nexus.ldn.swissbank.com:8081/nexus/content/repositories/g-ctit-public/' }
-        maven { url 'http://cft-nexus.ldn.swissbank.com:8081/nexus/content/repositories/ubs-nexus-cache-releases/' }
+//        maven { url 'http://cft-nexus.ldn.swissbank.com:8081/nexus/content/repositories/g-ctit-public/' }
+//        maven { url 'http://cft-nexus.ldn.swissbank.com:8081/nexus/content/repositories/ubs-nexus-cache-releases/' }
     }
-   dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:1.1.1'
-    }
+//   dependencies {
+//        classpath 'com.github.jengelman.gradle.plugins:shadow:1.1.1'
+//    }
 
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
-    }
+ //   dependencies {
+ //       classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
+ //   }
 }
 
 repositories {
     mavenCentral()
-    maven { url 'http://cft-nexus.ldn.swissbank.com:8081/nexus/content/repositories/g-ctit-public/' }
-    maven { url 'http://cft-nexus.ldn.swissbank.com:8081/nexus/content/repositories/ubs-nexus-cache-releases/' }
+//    maven { url 'http://cft-nexus.ldn.swissbank.com:8081/nexus/content/repositories/g-ctit-public/' }
+//    maven { url 'http://cft-nexus.ldn.swissbank.com:8081/nexus/content/repositories/ubs-nexus-cache-releases/' }
     mavenLocal()
 }
 
 apply plugin: 'maven'
 apply plugin: 'java'
 apply plugin: 'application'
-apply plugin: 'com.github.johnrengelman.shadow'
+//apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: "sonar-runner"
 apply plugin: "jacoco"
 //apply plugin: 'spring-boot'
@@ -32,7 +32,6 @@ configurations.all {
 }
 
 apply from: "$rootDir/gradle/version.gradle"
-apply from: "$rootDir/libraries.gradle"
 apply from: "$rootDir/gradle/ide.gradle"
 apply from : "$rootDir/libraries.gradle"
 
@@ -58,9 +57,9 @@ sonarRunner {
     }
 }
 
-shadowJar {
-    mergeServiceFiles()
-}
+//shadowJar {
+//    mergeServiceFiles()
+//}
 
 mainClassName = 'com.ubs.drm.ApplicationImpl'
 jar {

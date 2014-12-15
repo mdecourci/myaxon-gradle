@@ -56,8 +56,8 @@ public class ToDoResource {
 		return "Hello there";
 	}
 
-	@ExceptionHandler
-	public void handleException(Principal principal, Throwable exception) {
-		LOGGER.error("handleException(): principal={}, exception={}", principal, exception);
-	}
+//	@ExceptionHandler
+//	public void handleException(Principal principal, Throwable exception) {
+//		LOGGER.error("handleException(): principal={}, exception={}", principal, exception);
+//	}
 }
