@@ -2,6 +2,9 @@ package org.netpod.configuration;
 
 import java.util.Arrays;
 
+import javax.inject.Inject;
+import javax.persistence.EntityManagerFactory;
+
 import org.axonframework.commandhandling.CommandBus;
 import org.axonframework.commandhandling.SimpleCommandBus;
 import org.axonframework.commandhandling.annotation.AggregateAnnotationCommandHandler;
@@ -20,13 +23,16 @@ import org.axonframework.eventsourcing.SpringPrototypeAggregateFactory;
 import org.axonframework.eventstore.jpa.JpaEventStore;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.netpod.core.domain.entity.ToDoItem;
 
 @Configuration
 @AnnotationDriven
+@EnableTransactionManagement
 public class AxonConfiguration {
 
+	@Inject private EntityManagerFactory 	entityManagerFactory;
 	@Bean
 	public CommandGatewayFactoryBean<CommandGateway> commandGatewayFactoryBean() {
 		CommandGatewayFactoryBean<CommandGateway> factory = new CommandGatewayFactoryBean<CommandGateway>();
@@ -49,7 +55,9 @@ public class AxonConfiguration {
 	
 	@Bean
 	public EntityManagerProvider entityManagerProvider() {
-		return new ContainerManagedEntityManagerProvider();
+		ContainerManagedEntityManagerProvider entityManagerProvider = new ContainerManagedEntityManagerProvider();
+		entityManagerProvider.setEntityManager(entityManagerFactory.createEntityManager());
+		return entityManagerProvider;
 	}
 	
 	@Bean

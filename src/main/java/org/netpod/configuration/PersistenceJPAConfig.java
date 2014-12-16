@@ -24,7 +24,7 @@ public class PersistenceJPAConfig {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(dataSource());
-		em.setPackagesToScan(new String[] { "org.axonframework.eventstore.jpa" });
+		em.setPackagesToScan(new String[] { "org.axonframework.eventstore.jpa", "org.netpod.core.domain.entity" });
 
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);
@@ -37,9 +37,10 @@ public class PersistenceJPAConfig {
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.h2.Driver");
-		dataSource.setUrl("jdbc:h2:tcp://localhost:10402/drm-risk-management");
+		dataSource.setUrl("jdbc:h2:tcp://localhost/~/drm-risk-management");
+//		dataSource.setUrl("jdbc:h2:tcp://localhost:10402/drm-risk-management");
 		dataSource.setUsername("sa");
-		dataSource.setPassword("password");
+//		dataSource.setPassword("password");
 		return dataSource;
 	}
 
@@ -48,7 +49,6 @@ public class PersistenceJPAConfig {
 			EntityManagerFactory emf) {
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
 		transactionManager.setEntityManagerFactory(emf);
-
 		return transactionManager;
 	}
 

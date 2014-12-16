@@ -39,15 +39,15 @@ public class ToDoResource {
 	@Inject private Server server;
 	
 	@RequestMapping(value = "/items", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
-	@PreAuthorize("hasRole('DRM_Sales')")
 	@ResponseStatus(value = HttpStatus.OK)
+	@PreAuthorize("hasRole('DRM_Legal')")
 	public void createToDoItem(Principal principal, @RequestBody @Valid ToDoItemRequest request) {
 		LOGGER.info("createToDoItem(): principal={}, request={}", principal, request);
 		commandGateway.send(new CreateToDoItemCommand(identifierFactory.generateIdentifier(), request.getDescription()));
 	}
 
 	@RequestMapping(value = "/items", method = RequestMethod.GET)
-	@PreAuthorize("hasRole('DRM_Legal')")
+	@PreAuthorize("hasRole('DRM_Sales')")
 	public String hello() {
 		LOGGER.info("hello(): resources={}", resources);
 		LOGGER.info("hello(): database={}", database);
