@@ -21,11 +21,12 @@ import org.axonframework.eventhandling.SimpleEventBus;
 import org.axonframework.eventsourcing.EventSourcingRepository;
 import org.axonframework.eventsourcing.SpringPrototypeAggregateFactory;
 import org.axonframework.eventstore.jpa.JpaEventStore;
+import org.axonframework.unitofwork.SpringTransactionManager;
+import org.netpod.core.domain.entity.ToDoItem;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.netpod.core.domain.entity.ToDoItem;
 
 @Configuration
 @AnnotationDriven
@@ -33,6 +34,8 @@ import org.netpod.core.domain.entity.ToDoItem;
 public class AxonConfiguration {
 
 	@Inject private EntityManagerFactory 	entityManagerFactory;
+	@Inject PlatformTransactionManager transactionManager;
+	
 	@Bean
 	public CommandGatewayFactoryBean<CommandGateway> commandGatewayFactoryBean() {
 		CommandGatewayFactoryBean<CommandGateway> factory = new CommandGatewayFactoryBean<CommandGateway>();
@@ -44,7 +47,7 @@ public class AxonConfiguration {
 	public CommandBus commandBus() {
 		SimpleCommandBus commandBus = new SimpleCommandBus();
 		commandBus.setHandlerInterceptors(Arrays.asList(new BeanValidationInterceptor()));
-//		commandBus.setTransactionManager(new SpringTransactionManager(transactionManager));
+		commandBus.setTransactionManager(new SpringTransactionManager(transactionManager));
 		return commandBus;
 	}
 
